@@ -118,12 +118,12 @@ const Select = ({ label, options, className = "", ...props }) => (
 
 const LoginScreen = ({ onLogin }) => (
   <div className="min-h-screen bg-slate-100 flex items-center justify-center p-4">
-    <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md border-t-4 border-slate-900">
+    <div className="bg-white p-6 md:p-8 rounded-xl shadow-lg w-full max-w-md border-t-4 border-slate-900">
       <div className="text-center mb-8">
         <div className="w-16 h-16 bg-slate-900 rounded-lg mx-auto flex items-center justify-center mb-4">
           <Calculator className="w-8 h-8 text-white" />
         </div>
-        <h1 className="text-2xl font-bold text-slate-900">CA Pro Connect</h1>
+        <h1 className="text-2xl md:text-3xl font-bold text-slate-900">CA Pro Connect</h1>
         <p className="text-slate-500 text-sm mt-1">Authorized Access Only</p>
       </div>
       
@@ -131,12 +131,12 @@ const LoginScreen = ({ onLogin }) => (
         <Input label="Email ID" type="email" placeholder="ca.admin@firm.com" defaultValue="admin@ca-office.com" />
         <Input label="Password" type="password" placeholder="••••••••" defaultValue="password" />
         
-        <div className="flex items-center justify-between text-sm">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-sm">
           <label className="flex items-center text-slate-600">
             <input type="checkbox" className="mr-2 rounded text-blue-600 focus:ring-blue-500" />
-            Remember me
+            <span className="text-xs md:text-sm">Remember me</span>
           </label>
-          <a href="#" className="text-blue-700 hover:underline">Forgot password?</a>
+          <a href="#" className="text-blue-700 hover:underline text-xs md:text-sm">Forgot password?</a>
         </div>
 
         <Button type="submit" className="w-full justify-center">Secure Login</Button>
@@ -151,7 +151,7 @@ const LoginScreen = ({ onLogin }) => (
 
 const Dashboard = () => (
   <div className="space-y-6 animate-fade-in">
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       {[
         { label: "Active Clients", value: "42", icon: Users, color: "text-blue-600", bg: "bg-blue-50" },
         { label: "Pending Returns", value: "8", icon: FileText, color: "text-amber-600", bg: "bg-amber-50" },
@@ -159,33 +159,33 @@ const Dashboard = () => (
         { label: "System Alerts", value: "2", icon: Bell, color: "text-red-600", bg: "bg-red-50" },
       ].map((stat, i) => (
         <Card key={i} className="p-4 flex items-center justify-between">
-          <div>
-            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">{stat.label}</p>
-            <h3 className="text-2xl font-bold text-slate-900 mt-1">{stat.value}</h3>
+          <div className="min-w-0">
+            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider whitespace-normal">{stat.label}</p>
+            <h3 className="text-xl md:text-2xl font-bold text-slate-900 mt-1">{stat.value}</h3>
           </div>
-          <div className={`p-3 rounded-full ${stat.bg}`}>
-            <stat.icon className={`w-6 h-6 ${stat.color}`} />
+          <div className={`p-3 rounded-full ${stat.bg} flex-shrink-0`}>
+            <stat.icon className={`w-5 md:w-6 h-5 md:h-6 ${stat.color}`} />
           </div>
         </Card>
       ))}
     </div>
 
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      <Card className="lg:col-span-2 p-6">
-        <div className="flex items-center justify-between mb-6">
+      <Card className="lg:col-span-2 p-4 md:p-6">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
           <h3 className="font-bold text-slate-800">Income vs Expense (YTD)</h3>
-          <select className="text-xs border-slate-300 rounded-md p-1 bg-slate-50">
+          <select className="text-xs border border-slate-300 rounded-md p-1 bg-slate-50 w-full sm:w-auto">
             <option>Last 6 Months</option>
             <option>This Year</option>
           </select>
         </div>
         {/* Simple CSS Chart Visualization */}
-        <div className="flex items-end justify-between h-64 space-x-4">
+        <div className="flex items-end justify-between h-48 md:h-64 space-x-2 md:space-x-4">
           {[65, 40, 75, 55, 80, 45].map((h, i) => (
             <div key={i} className="flex-1 flex flex-col justify-end group">
               <div className="w-full flex space-x-1 items-end h-full">
                 <div style={{ height: `${h}%` }} className="flex-1 bg-slate-800 rounded-t-sm relative group-hover:bg-slate-700 transition-all">
-                   <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity">₹{h}L</div>
+                   <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[8px] md:text-[10px] py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">₹{h}L</div>
                 </div>
                 <div style={{ height: `${h * 0.6}%` }} className="flex-1 bg-slate-300 rounded-t-sm relative"></div>
               </div>
@@ -193,13 +193,13 @@ const Dashboard = () => (
             </div>
           ))}
         </div>
-        <div className="flex justify-center space-x-6 mt-4">
-          <div className="flex items-center text-xs text-slate-600"><div className="w-3 h-3 bg-slate-800 mr-2"></div>Income</div>
-          <div className="flex items-center text-xs text-slate-600"><div className="w-3 h-3 bg-slate-300 mr-2"></div>Expense</div>
+        <div className="flex justify-center space-x-4 md:space-x-6 mt-4 text-xs md:text-sm">
+          <div className="flex items-center text-slate-600"><div className="w-3 h-3 bg-slate-800 mr-2"></div>Income</div>
+          <div className="flex items-center text-slate-600"><div className="w-3 h-3 bg-slate-300 mr-2"></div>Expense</div>
         </div>
       </Card>
 
-      <Card className="p-6">
+      <Card className="p-4 md:p-6">
         <h3 className="font-bold text-slate-800 mb-4">Upcoming Deadlines</h3>
         <div className="space-y-4">
           {[
@@ -209,11 +209,11 @@ const Dashboard = () => (
             { title: "Annual Audit", date: "30 Sep", entity: "Dr. Sharma", status: "late" },
           ].map((item, i) => (
             <div key={i} className="flex items-start pb-4 border-b border-slate-100 last:border-0 last:pb-0">
-              <div className="flex-1">
-                <p className="text-sm font-medium text-slate-800">{item.title}</p>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-slate-800 break-words">{item.title}</p>
                 <p className="text-xs text-slate-500">{item.entity}</p>
               </div>
-              <div className="text-right">
+              <div className="text-right flex-shrink-0 ml-2">
                 <span className={`text-xs font-bold ${
                   item.status === 'urgent' ? 'text-amber-600' : 
                   item.status === 'late' ? 'text-red-600' : 'text-slate-600'
@@ -232,45 +232,47 @@ const Dashboard = () => (
 
 const ClientList = () => (
   <div className="space-y-4">
-    <div className="flex justify-between items-center">
+    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
       <h2 className="text-xl font-bold text-slate-800">Client Directory</h2>
-      <Button icon={Plus}>Add New Client</Button>
+      <Button icon={Plus} className="w-full sm:w-auto justify-center">Add New Client</Button>
     </div>
 
-    <Card className="overflow-hidden">
-      <div className="p-4 border-b border-slate-200 bg-slate-50 flex items-center justify-between">
-        <div className="relative w-64">
+    <Card className="overflow-x-auto">
+      <div className="p-4 border-b border-slate-200 bg-slate-50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="relative w-full sm:w-64">
           <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
           <input type="text" placeholder="Search clients..." className="w-full pl-9 pr-4 py-2 text-sm border border-slate-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500" />
         </div>
-        <Button variant="secondary" icon={Filter} className="text-xs">Filter</Button>
+        <Button variant="secondary" icon={Filter} className="text-xs w-full sm:w-auto justify-center">Filter</Button>
       </div>
-      <table className="w-full text-sm text-left">
-        <thead className="bg-slate-100 text-slate-600 font-semibold uppercase text-xs">
-          <tr>
-            <th className="px-6 py-3">Client Name</th>
-            <th className="px-6 py-3">GSTIN</th>
-            <th className="px-6 py-3">Group</th>
-            <th className="px-6 py-3">Status</th>
-            <th className="px-6 py-3 text-right">Actions</th>
-          </tr>
-        </thead>
-        <tbody className="divide-y divide-slate-100">
-          {MOCK_CLIENTS.map((client) => (
-            <tr key={client.id} className="hover:bg-slate-50 transition-colors cursor-pointer">
-              <td className="px-6 py-4 font-medium text-slate-900">{client.name}</td>
-              <td className="px-6 py-4 font-mono text-slate-600">{client.gstin}</td>
-              <td className="px-6 py-4 text-slate-600">{client.group}</td>
-              <td className="px-6 py-4">
-                <Badge type={client.status === 'Active' ? 'success' : 'warning'}>{client.status}</Badge>
-              </td>
-              <td className="px-6 py-4 text-right">
-                <button className="text-blue-600 hover:text-blue-800 font-medium text-xs">Manage</button>
-              </td>
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm text-left">
+          <thead className="bg-slate-100 text-slate-600 font-semibold uppercase text-xs">
+            <tr>
+              <th className="px-4 md:px-6 py-3 whitespace-nowrap">Client Name</th>
+              <th className="px-4 md:px-6 py-3 whitespace-nowrap">GSTIN</th>
+              <th className="px-4 md:px-6 py-3 whitespace-nowrap hidden sm:table-cell">Group</th>
+              <th className="px-4 md:px-6 py-3 whitespace-nowrap">Status</th>
+              <th className="px-4 md:px-6 py-3 text-right whitespace-nowrap">Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody className="divide-y divide-slate-100">
+            {MOCK_CLIENTS.map((client) => (
+              <tr key={client.id} className="hover:bg-slate-50 transition-colors cursor-pointer">
+                <td className="px-4 md:px-6 py-4 font-medium text-slate-900 text-sm md:text-base">{client.name}</td>
+                <td className="px-4 md:px-6 py-4 font-mono text-slate-600 text-xs md:text-sm">{client.gstin}</td>
+                <td className="px-4 md:px-6 py-4 text-slate-600 hidden sm:table-cell text-sm">{client.group}</td>
+                <td className="px-4 md:px-6 py-4">
+                  <Badge type={client.status === 'Active' ? 'success' : 'warning'}>{client.status}</Badge>
+                </td>
+                <td className="px-4 md:px-6 py-4 text-right">
+                  <button className="text-blue-600 hover:text-blue-800 font-medium text-xs">Manage</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </Card>
   </div>
 );
@@ -280,9 +282,9 @@ const VoucherEntry = () => {
 
   return (
     <div className="space-y-4">
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <h2 className="text-xl font-bold text-slate-800">Voucher Entry</h2>
-        <div className="text-sm text-slate-500">
+        <div className="text-sm text-slate-500 text-left sm:text-right">
           Voucher No: <span className="font-mono font-bold text-slate-900">SAL/24-25/0042</span>
         </div>
       </div>
@@ -292,7 +294,7 @@ const VoucherEntry = () => {
           <button
             key={type}
             onClick={() => setActiveType(type)}
-            className={`px-4 py-2 text-sm font-medium rounded-t-md transition-colors ${
+            className={`px-3 md:px-4 py-2 text-xs md:text-sm font-medium rounded-t-md transition-colors whitespace-nowrap ${
               activeType === type 
                 ? 'bg-slate-800 text-white' 
                 : 'bg-white text-slate-600 hover:bg-slate-100'
@@ -303,12 +305,12 @@ const VoucherEntry = () => {
         ))}
       </div>
 
-      <Card className="p-6">
+      <Card className="p-4 md:p-6">
         {/* Header Section */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           <Input label="Voucher Date" type="date" defaultValue="2024-10-15" />
           <Input label="Reference No" placeholder="PO/Inv No." />
-          <div className="md:col-span-2">
+          <div className="sm:col-span-2">
              <label className="mb-1 text-xs font-semibold text-slate-600 uppercase block">Party A/c Name</label>
              <div className="relative">
                 <input type="text" className="w-full px-3 py-2 border border-slate-300 rounded-md text-sm" placeholder="Select Ledger..." defaultValue="Apex Polylabs Ltd" />
@@ -317,77 +319,78 @@ const VoucherEntry = () => {
           </div>
         </div>
 
-        {/* Item Table */}
-        <div className="border border-slate-200 rounded-md overflow-hidden mb-6">
+        {/* Item Table - Mobile Responsive */}
+        <div className="border border-slate-200 rounded-md overflow-x-auto mb-6">
           <table className="w-full text-sm">
             <thead className="bg-slate-100 text-slate-700 text-xs uppercase font-semibold">
               <tr>
-                <th className="px-4 py-2 text-left w-12">No.</th>
-                <th className="px-4 py-2 text-left">Particulars</th>
-                <th className="px-4 py-2 text-right w-32">Rate %</th>
-                <th className="px-4 py-2 text-right w-40">Amount</th>
-                <th className="px-4 py-2 text-center w-16">Dr/Cr</th>
+                <th className="px-3 md:px-4 py-2 text-left w-10 md:w-12">No.</th>
+                <th className="px-3 md:px-4 py-2 text-left">Particulars</th>
+                <th className="px-3 md:px-4 py-2 text-right w-24 md:w-32 hidden sm:table-cell">Rate %</th>
+                <th className="px-3 md:px-4 py-2 text-right w-24 md:w-40">Amount</th>
+                <th className="px-3 md:px-4 py-2 text-center w-12 md:w-16 hidden sm:table-cell">Dr/Cr</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
               <tr>
-                <td className="px-4 py-2 text-slate-500">1</td>
-                <td className="px-4 py-2">
-                  <input type="text" className="w-full border-none focus:ring-0 p-0 text-sm font-medium" defaultValue="Consultancy Charges" />
+                <td className="px-3 md:px-4 py-2 text-slate-500 text-xs md:text-base">1</td>
+                <td className="px-3 md:px-4 py-2">
+                  <input type="text" className="w-full border-none focus:ring-0 p-0 text-xs md:text-sm font-medium" defaultValue="Consultancy Charges" />
                 </td>
-                <td className="px-4 py-2 text-right text-slate-500">18%</td>
-                <td className="px-4 py-2 text-right font-mono">25,000.00</td>
-                <td className="px-4 py-2 text-center text-xs font-bold text-slate-600">Cr</td>
+                <td className="px-3 md:px-4 py-2 text-right text-slate-500 hidden sm:table-cell text-xs md:text-base">18%</td>
+                <td className="px-3 md:px-4 py-2 text-right font-mono text-xs md:text-base">25,000.00</td>
+                <td className="px-3 md:px-4 py-2 text-center text-xs font-bold text-slate-600 hidden sm:table-cell">Cr</td>
               </tr>
               <tr>
-                <td className="px-4 py-2 text-slate-500">2</td>
-                <td className="px-4 py-2">
-                  <input type="text" className="w-full border-none focus:ring-0 p-0 text-sm font-medium" defaultValue="Output CGST 9%" />
+                <td className="px-3 md:px-4 py-2 text-slate-500 text-xs md:text-base">2</td>
+                <td className="px-3 md:px-4 py-2">
+                  <input type="text" className="w-full border-none focus:ring-0 p-0 text-xs md:text-sm font-medium" defaultValue="Output CGST 9%" />
                 </td>
-                <td className="px-4 py-2 text-right text-slate-500">-</td>
-                <td className="px-4 py-2 text-right font-mono">2,250.00</td>
-                <td className="px-4 py-2 text-center text-xs font-bold text-slate-600">Cr</td>
+                <td className="px-3 md:px-4 py-2 text-right text-slate-500 hidden sm:table-cell text-xs md:text-base">-</td>
+                <td className="px-3 md:px-4 py-2 text-right font-mono text-xs md:text-base">2,250.00</td>
+                <td className="px-3 md:px-4 py-2 text-center text-xs font-bold text-slate-600 hidden sm:table-cell">Cr</td>
               </tr>
                <tr>
-                <td className="px-4 py-2 text-slate-500">3</td>
-                <td className="px-4 py-2">
-                  <input type="text" className="w-full border-none focus:ring-0 p-0 text-sm font-medium" defaultValue="Output SGST 9%" />
+                <td className="px-3 md:px-4 py-2 text-slate-500 text-xs md:text-base">3</td>
+                <td className="px-3 md:px-4 py-2">
+                  <input type="text" className="w-full border-none focus:ring-0 p-0 text-xs md:text-sm font-medium" defaultValue="Output SGST 9%" />
                 </td>
-                <td className="px-4 py-2 text-right text-slate-500">-</td>
-                <td className="px-4 py-2 text-right font-mono">2,250.00</td>
-                <td className="px-4 py-2 text-center text-xs font-bold text-slate-600">Cr</td>
+                <td className="px-3 md:px-4 py-2 text-right text-slate-500 hidden sm:table-cell text-xs md:text-base">-</td>
+                <td className="px-3 md:px-4 py-2 text-right font-mono text-xs md:text-base">2,250.00</td>
+                <td className="px-3 md:px-4 py-2 text-center text-xs font-bold text-slate-600 hidden sm:table-cell">Cr</td>
               </tr>
                {/* Empty Row for entry */}
                <tr className="bg-slate-50">
-                <td className="px-4 py-2 text-slate-500">4</td>
-                <td className="px-4 py-2">
-                  <input type="text" className="w-full bg-transparent border-none focus:ring-0 p-0 text-sm italic text-slate-400" placeholder="Type to search ledger..." />
+                <td className="px-3 md:px-4 py-2 text-slate-500 text-xs md:text-base">4</td>
+                <td className="px-3 md:px-4 py-2">
+                  <input type="text" className="w-full bg-transparent border-none focus:ring-0 p-0 text-xs md:text-sm italic text-slate-400" placeholder="Type to search ledger..." />
                 </td>
-                <td className="px-4 py-2 text-right"></td>
-                <td className="px-4 py-2 text-right"></td>
-                <td className="px-4 py-2 text-center"></td>
+                <td className="px-3 md:px-4 py-2 text-right hidden sm:table-cell"></td>
+                <td className="px-3 md:px-4 py-2 text-right"></td>
+                <td className="px-3 md:px-4 py-2 text-center hidden sm:table-cell"></td>
               </tr>
             </tbody>
             <tfoot className="bg-slate-50 border-t border-slate-200 font-bold">
               <tr>
-                <td colSpan="3" className="px-4 py-3 text-right uppercase text-xs text-slate-600">Total</td>
-                <td className="px-4 py-3 text-right font-mono text-slate-900">29,500.00</td>
-                <td></td>
+                <td colSpan="2" className="px-3 md:px-4 py-3 text-right uppercase text-xs text-slate-600 sm:col-span-2">Total</td>
+                <td className="px-3 md:px-4 py-3 text-right font-mono text-slate-900 hidden sm:table-cell">-</td>
+                <td className="px-3 md:px-4 py-3 text-right font-mono text-slate-900">29,500.00</td>
+                <td className="hidden sm:table-cell"></td>
               </tr>
             </tfoot>
           </table>
         </div>
 
         {/* Footer */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div className="space-y-2">
             <label className="text-xs font-semibold text-slate-600 uppercase">Narration</label>
             <textarea className="w-full border border-slate-300 rounded-md p-2 text-sm h-20" placeholder="Being invoice raised for..." defaultValue="Being professional fees charged for Q2 audit." />
           </div>
-          <div className="flex items-end justify-end space-x-3">
-             <Button variant="ghost">Cancel</Button>
-             <Button variant="secondary">Save & Print</Button>
-             <Button>Save Voucher</Button>
+          <div className="flex flex-col sm:flex-row items-center justify-end gap-3">
+             <Button variant="ghost" className="w-full sm:w-auto">Cancel</Button>
+             <Button variant="secondary" className="w-full sm:w-auto">Save & Print</Button>
+             <Button className="w-full sm:w-auto">Save Voucher</Button>
           </div>
         </div>
       </Card>
@@ -397,86 +400,86 @@ const VoucherEntry = () => {
 
 const ReportScreen = () => (
   <div className="space-y-4">
-    <div className="flex justify-between items-center">
+    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
       <h2 className="text-xl font-bold text-slate-800">Profit & Loss A/c</h2>
-      <div className="flex space-x-2">
-         <Button variant="secondary" icon={Download} className="text-xs">Export PDF</Button>
-         <Button variant="secondary" icon={FileSpreadsheet} className="text-xs">Export Excel</Button>
+      <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+         <Button variant="secondary" icon={Download} className="text-xs w-full sm:w-auto justify-center">Export PDF</Button>
+         <Button variant="secondary" icon={FileSpreadsheet} className="text-xs w-full sm:w-auto justify-center">Export Excel</Button>
       </div>
     </div>
 
-    <Card className="p-6">
-      <div className="flex justify-between items-end border-b border-slate-900 pb-4 mb-4">
-        <div>
+    <Card className="p-4 md:p-6 overflow-x-auto">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end border-b border-slate-900 pb-4 mb-4 gap-4">
+        <div className="min-w-0">
           <h3 className="text-lg font-bold text-slate-900 uppercase tracking-widest">TechNova Solutions</h3>
           <p className="text-sm text-slate-600">For the year ending 31st March 2025</p>
         </div>
-        <div className="text-right">
+        <div className="text-right flex-shrink-0">
            <p className="text-xs text-slate-500">Figures in INR</p>
         </div>
       </div>
 
       {/* Classic T-Format / Vertical Format Simulation */}
-      <table className="w-full text-sm">
+      <table className="w-full text-sm min-w-full">
         <thead className="bg-slate-100 text-slate-700 font-semibold uppercase text-xs border-y border-slate-300">
           <tr>
-            <th className="px-4 py-2 text-left">Particulars</th>
-            <th className="px-4 py-2 text-right w-40">Amount</th>
+            <th className="px-3 md:px-4 py-2 text-left">Particulars</th>
+            <th className="px-3 md:px-4 py-2 text-right w-32 md:w-40">Amount</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-slate-100">
           <tr className="bg-slate-50">
-            <td className="px-4 py-2 font-bold text-slate-800">Gross Revenue</td>
-            <td className="px-4 py-2 text-right font-mono font-bold">45,20,000.00</td>
+            <td className="px-3 md:px-4 py-2 font-bold text-slate-800 text-sm md:text-base">Gross Revenue</td>
+            <td className="px-3 md:px-4 py-2 text-right font-mono font-bold text-sm md:text-base">45,20,000.00</td>
           </tr>
           <tr>
-             <td className="px-8 py-2 text-slate-600">Sales of Services</td>
-             <td className="px-4 py-2 text-right font-mono">42,00,000.00</td>
+             <td className="px-6 md:px-8 py-2 text-slate-600 text-sm">Sales of Services</td>
+             <td className="px-3 md:px-4 py-2 text-right font-mono text-sm">42,00,000.00</td>
           </tr>
           <tr>
-             <td className="px-8 py-2 text-slate-600">Other Income</td>
-             <td className="px-4 py-2 text-right font-mono">3,20,000.00</td>
+             <td className="px-6 md:px-8 py-2 text-slate-600 text-sm">Other Income</td>
+             <td className="px-3 md:px-4 py-2 text-right font-mono text-sm">3,20,000.00</td>
           </tr>
           
           <tr className="bg-slate-50">
-            <td className="px-4 py-2 font-bold text-slate-800 mt-4">Direct Expenses</td>
-            <td className="px-4 py-2 text-right font-mono font-bold">(12,40,000.00)</td>
+            <td className="px-3 md:px-4 py-2 font-bold text-slate-800 mt-4 text-sm md:text-base">Direct Expenses</td>
+            <td className="px-3 md:px-4 py-2 text-right font-mono font-bold text-sm md:text-base">(12,40,000.00)</td>
           </tr>
           <tr>
-             <td className="px-8 py-2 text-slate-600">Consultant Fees</td>
-             <td className="px-4 py-2 text-right font-mono">8,00,000.00</td>
+             <td className="px-6 md:px-8 py-2 text-slate-600 text-sm">Consultant Fees</td>
+             <td className="px-3 md:px-4 py-2 text-right font-mono text-sm">8,00,000.00</td>
           </tr>
           <tr>
-             <td className="px-8 py-2 text-slate-600">Software Licenses</td>
-             <td className="px-4 py-2 text-right font-mono">4,40,000.00</td>
+             <td className="px-6 md:px-8 py-2 text-slate-600 text-sm">Software Licenses</td>
+             <td className="px-3 md:px-4 py-2 text-right font-mono text-sm">4,40,000.00</td>
           </tr>
 
            <tr className="bg-blue-50">
-            <td className="px-4 py-3 font-bold text-slate-900 uppercase text-xs tracking-wider">Gross Profit</td>
-            <td className="px-4 py-3 text-right font-mono font-bold text-slate-900 border-t border-slate-400">32,80,000.00</td>
+            <td className="px-3 md:px-4 py-3 font-bold text-slate-900 uppercase text-xs tracking-wider">Gross Profit</td>
+            <td className="px-3 md:px-4 py-3 text-right font-mono font-bold text-slate-900 border-t border-slate-400 text-sm md:text-base">32,80,000.00</td>
           </tr>
 
            <tr className="bg-slate-50">
-            <td className="px-4 py-2 font-bold text-slate-800">Indirect Expenses</td>
-            <td className="px-4 py-2 text-right font-mono font-bold">(8,50,000.00)</td>
+            <td className="px-3 md:px-4 py-2 font-bold text-slate-800 text-sm md:text-base">Indirect Expenses</td>
+            <td className="px-3 md:px-4 py-2 text-right font-mono font-bold text-sm md:text-base">(8,50,000.00)</td>
           </tr>
            <tr>
-             <td className="px-8 py-2 text-slate-600">Rent & Utilities</td>
-             <td className="px-4 py-2 text-right font-mono">3,00,000.00</td>
+             <td className="px-6 md:px-8 py-2 text-slate-600 text-sm">Rent & Utilities</td>
+             <td className="px-3 md:px-4 py-2 text-right font-mono text-sm">3,00,000.00</td>
           </tr>
           <tr>
-             <td className="px-8 py-2 text-slate-600">Office Expenses</td>
-             <td className="px-4 py-2 text-right font-mono">1,50,000.00</td>
+             <td className="px-6 md:px-8 py-2 text-slate-600 text-sm">Office Expenses</td>
+             <td className="px-3 md:px-4 py-2 text-right font-mono text-sm">1,50,000.00</td>
           </tr>
            <tr>
-             <td className="px-8 py-2 text-slate-600">Salaries</td>
-             <td className="px-4 py-2 text-right font-mono">4,00,000.00</td>
+             <td className="px-6 md:px-8 py-2 text-slate-600 text-sm">Salaries</td>
+             <td className="px-3 md:px-4 py-2 text-right font-mono text-sm">4,00,000.00</td>
           </tr>
         </tbody>
         <tfoot className="border-t-2 border-slate-900 bg-slate-100">
           <tr>
-             <td className="px-4 py-4 font-bold text-lg text-slate-900 uppercase">Net Profit</td>
-             <td className="px-4 py-4 text-right font-mono font-bold text-lg text-slate-900">24,30,000.00</td>
+             <td className="px-3 md:px-4 py-4 font-bold text-lg text-slate-900 uppercase text-sm md:text-base">Net Profit</td>
+             <td className="px-3 md:px-4 py-4 text-right font-mono font-bold text-lg text-slate-900">24,30,000.00</td>
           </tr>
         </tfoot>
       </table>
@@ -486,65 +489,67 @@ const ReportScreen = () => (
 
 const GSTDashboard = () => (
   <div className="space-y-6">
-    <div className="flex justify-between items-center">
+    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
       <h2 className="text-xl font-bold text-slate-800">GST Compliance</h2>
       <Badge type="success">Monthly Filing: Regular</Badge>
     </div>
 
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
        <Card className="p-4 bg-blue-50 border-blue-100">
           <p className="text-xs font-bold text-blue-700 uppercase">Input Tax Credit (ITC)</p>
-          <h3 className="text-2xl font-mono font-bold text-slate-800 mt-2">₹1,24,500</h3>
+          <h3 className="text-xl md:text-2xl font-mono font-bold text-slate-800 mt-2">₹1,24,500</h3>
           <p className="text-xs text-slate-500 mt-1">Available in Electronic Ledger</p>
        </Card>
        <Card className="p-4 bg-red-50 border-red-100">
           <p className="text-xs font-bold text-red-700 uppercase">Output Liability</p>
-          <h3 className="text-2xl font-mono font-bold text-slate-800 mt-2">₹3,45,000</h3>
+          <h3 className="text-xl md:text-2xl font-mono font-bold text-slate-800 mt-2">₹3,45,000</h3>
           <p className="text-xs text-slate-500 mt-1">For Oct 2024</p>
        </Card>
-       <Card className="p-4 bg-slate-50 border-slate-200 col-span-2">
+       <Card className="p-4 bg-slate-50 border-slate-200 sm:col-span-2 lg:col-span-2">
           <p className="text-xs font-bold text-slate-600 uppercase">Cash Liability (Net)</p>
-          <div className="flex items-end justify-between">
-             <h3 className="text-2xl font-mono font-bold text-slate-800 mt-2">₹2,20,500</h3>
-             <Button size="sm" className="text-xs py-1 px-3 h-8">Generate Challan</Button>
+          <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 mt-2">
+             <h3 className="text-xl md:text-2xl font-mono font-bold text-slate-800">₹2,20,500</h3>
+             <Button size="sm" className="text-xs py-1 px-3 h-8 w-full sm:w-auto">Generate Challan</Button>
           </div>
        </Card>
     </div>
 
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <Card>
-        <div className="p-4 border-b border-slate-100 flex justify-between items-center">
+        <div className="p-4 border-b border-slate-100 flex justify-between items-center flex-col sm:flex-row gap-2">
            <h3 className="font-bold text-slate-800">GSTR-1 Summary</h3>
            <span className="text-xs text-slate-500">Oct 2024</span>
         </div>
-        <table className="w-full text-sm">
-          <thead className="bg-slate-50 text-xs text-slate-500 uppercase">
-             <tr>
-                <th className="px-4 py-2 text-left">Section</th>
-                <th className="px-4 py-2 text-right">Count</th>
-                <th className="px-4 py-2 text-right">Taxable Val</th>
-                <th className="px-4 py-2 text-right">Tax Liab</th>
-             </tr>
-          </thead>
-          <tbody className="divide-y divide-slate-100">
-            {MOCK_GSTR1_SUMMARY.map((row, i) => (
-              <tr key={i}>
-                <td className="px-4 py-3 font-medium text-slate-700">{row.title}</td>
-                <td className="px-4 py-3 text-right">{row.count}</td>
-                <td className="px-4 py-3 text-right font-mono">{row.value.toLocaleString()}</td>
-                <td className="px-4 py-3 text-right font-mono">{row.tax.toLocaleString()}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead className="bg-slate-50 text-xs text-slate-500 uppercase">
+               <tr>
+                  <th className="px-3 md:px-4 py-2 text-left">Section</th>
+                  <th className="px-3 md:px-4 py-2 text-right">Count</th>
+                  <th className="px-3 md:px-4 py-2 text-right hidden sm:table-cell">Taxable Val</th>
+                  <th className="px-3 md:px-4 py-2 text-right">Tax Liab</th>
+               </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100">
+              {MOCK_GSTR1_SUMMARY.map((row, i) => (
+                <tr key={i}>
+                  <td className="px-3 md:px-4 py-3 font-medium text-slate-700 text-sm">{row.title}</td>
+                  <td className="px-3 md:px-4 py-3 text-right text-sm">{row.count}</td>
+                  <td className="px-3 md:px-4 py-3 text-right font-mono hidden sm:table-cell text-sm">{row.value.toLocaleString()}</td>
+                  <td className="px-3 md:px-4 py-3 text-right font-mono text-sm">{row.tax.toLocaleString()}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </Card>
 
       <Card>
-        <div className="p-4 border-b border-slate-100 flex justify-between items-center">
+        <div className="p-4 border-b border-slate-100 flex justify-between items-center flex-col sm:flex-row gap-2">
            <h3 className="font-bold text-slate-800">GSTR-3B Status</h3>
            <Badge type="warning">Due in 5 Days</Badge>
         </div>
-        <div className="p-6 space-y-4">
+        <div className="p-4 md:p-6 space-y-4">
            <div className="flex justify-between items-center text-sm">
               <span className="text-slate-600">3.1 Tax on outward supplies</span>
               <span className="font-mono font-bold">3,45,000</span>
@@ -568,20 +573,20 @@ const GSTDashboard = () => (
 
 const Documents = () => (
    <div className="space-y-4">
-    <div className="flex justify-between items-center">
+    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
       <h2 className="text-xl font-bold text-slate-800">Client Documents</h2>
-      <Button icon={UploadCloud}>Upload Files</Button>
+      <Button icon={UploadCloud} className="w-full sm:w-auto justify-center">Upload Files</Button>
     </div>
 
-    <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
        {['Invoices', 'Bank Statements', 'Deeds & Contracts', 'Tax Notices'].map((folder, i) => (
           <Card key={i} className="p-4 hover:bg-slate-50 cursor-pointer transition-colors border border-slate-200">
              <div className="flex items-center space-x-3">
-                <div className="bg-blue-100 p-2 rounded text-blue-600">
+                <div className="bg-blue-100 p-2 rounded text-blue-600 flex-shrink-0">
                    <Briefcase className="w-6 h-6" />
                 </div>
-                <div>
-                   <h4 className="font-medium text-slate-800">{folder}</h4>
+                <div className="min-w-0">
+                   <h4 className="font-medium text-slate-800 text-sm truncate">{folder}</h4>
                    <p className="text-xs text-slate-500">12 Files</p>
                 </div>
              </div>
@@ -593,21 +598,23 @@ const Documents = () => (
        <div className="p-4 border-b border-slate-200">
           <h3 className="font-bold text-sm uppercase text-slate-600">Recent Uploads</h3>
        </div>
-       <table className="w-full text-sm">
-          <tbody className="divide-y divide-slate-100">
-             {[1,2,3].map((item) => (
-                <tr key={item} className="hover:bg-slate-50">
-                   <td className="px-4 py-3 w-8"><FileText className="w-4 h-4 text-slate-400" /></td>
-                   <td className="px-4 py-3 font-medium text-slate-700">HDFC_Stmt_Oct24.pdf</td>
-                   <td className="px-4 py-3 text-slate-500 text-xs">Bank Statements</td>
-                   <td className="px-4 py-3 text-slate-500 text-xs">12 Oct 2024</td>
-                   <td className="px-4 py-3 text-right">
-                      <Button variant="ghost" className="p-1 h-auto"><Download className="w-4 h-4" /></Button>
-                   </td>
-                </tr>
-             ))}
-          </tbody>
-       </table>
+       <div className="overflow-x-auto">
+         <table className="w-full text-sm">
+            <tbody className="divide-y divide-slate-100">
+               {[1,2,3].map((item) => (
+                  <tr key={item} className="hover:bg-slate-50">
+                     <td className="px-4 py-3 w-8 flex-shrink-0"><FileText className="w-4 h-4 text-slate-400" /></td>
+                     <td className="px-4 py-3 font-medium text-slate-700 text-sm min-w-0 truncate">HDFC_Stmt_Oct24.pdf</td>
+                     <td className="px-4 py-3 text-slate-500 text-xs hidden sm:table-cell whitespace-nowrap">Bank Statements</td>
+                     <td className="px-4 py-3 text-slate-500 text-xs whitespace-nowrap">12 Oct 2024</td>
+                     <td className="px-4 py-3 text-right flex-shrink-0">
+                        <Button variant="ghost" className="p-1 h-auto"><Download className="w-4 h-4" /></Button>
+                     </td>
+                  </tr>
+               ))}
+            </tbody>
+         </table>
+       </div>
     </Card>
    </div>
 )
@@ -619,7 +626,7 @@ export default function AccountingApp() {
   const [activeTab, setActiveTab] = useState("Dashboard");
   const [selectedClient, setSelectedClient] = useState(MOCK_CLIENTS[0]);
   const [selectedYear, setSelectedYear] = useState(FINANCIAL_YEARS[0]);
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false); // Default closed on mobile
 
   if (!isLoggedIn) {
     return <LoginScreen onLogin={() => setIsLoggedIn(true)} />;
@@ -659,8 +666,21 @@ export default function AccountingApp() {
   return (
     <div className="flex h-screen bg-slate-100 font-sans text-slate-900 overflow-hidden">
       
+      {/* Mobile Overlay for Sidebar */}
+      {sidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 z-10 md:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
-      <aside className={`${sidebarOpen ? 'w-64' : 'w-20'} bg-slate-900 flex-shrink-0 transition-all duration-300 flex flex-col z-20`}>
+      <aside className={`
+        fixed md:relative z-20
+        h-screen bg-slate-900 flex flex-col
+        transition-all duration-300 ease-in-out
+        ${sidebarOpen ? 'w-64' : 'w-0 md:w-20 -translate-x-full md:translate-x-0'}
+      `}>
         <div className="h-16 flex items-center px-6 border-b border-slate-800">
            {sidebarOpen ? (
              <div className="flex items-center space-x-2 text-white font-bold text-lg tracking-tight">
@@ -685,7 +705,7 @@ export default function AccountingApp() {
         </nav>
 
         <div className="p-4 border-t border-slate-800">
-           <button onClick={() => setIsLoggedIn(false)} className="flex items-center space-x-3 text-slate-400 hover:text-white w-full">
+           <button onClick={() => setIsLoggedIn(false)} className="flex items-center space-x-3 text-slate-400 hover:text-white w-full px-2 py-2 rounded hover:bg-slate-800">
               <LogOut className="w-5 h-5" />
               {sidebarOpen && <span className="text-sm">Sign Out</span>}
            </button>
@@ -696,27 +716,31 @@ export default function AccountingApp() {
       <div className="flex-1 flex flex-col min-w-0">
         
         {/* Top Bar */}
-        <header className="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-6 shadow-sm z-10">
-          <div className="flex items-center space-x-4">
-             <button onClick={() => setSidebarOpen(!sidebarOpen)} className="p-2 hover:bg-slate-100 rounded text-slate-500 lg:hidden">
-                <Menu className="w-5 h-5" />
+        <header className="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-4 md:px-6 shadow-sm z-10">
+          <div className="flex items-center space-x-2 md:space-x-4">
+             <button 
+               onClick={() => setSidebarOpen(!sidebarOpen)} 
+               className="p-2 hover:bg-slate-100 rounded text-slate-500 transition-colors"
+               title={sidebarOpen ? "Close sidebar" : "Open sidebar"}
+             >
+                {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
              </button>
              
              {/* Context Selectors - The "CA" workflow heart */}
-             <div className="hidden md:flex items-center space-x-2 bg-slate-50 p-1 rounded-md border border-slate-200">
-                <div className="flex items-center px-3 py-1 border-r border-slate-200">
-                   <Building2 className="w-4 h-4 text-slate-500 mr-2" />
+             <div className="hidden sm:flex items-center space-x-1 md:space-x-2 bg-slate-50 p-1 rounded-md border border-slate-200">
+                <div className="flex items-center px-2 md:px-3 py-1 border-r border-slate-200">
+                   <Building2 className="w-4 h-4 text-slate-500 mr-1 md:mr-2 flex-shrink-0" />
                    <select 
-                      className="bg-transparent text-sm font-semibold text-slate-700 focus:outline-none cursor-pointer"
+                      className="bg-transparent text-xs md:text-sm font-semibold text-slate-700 focus:outline-none cursor-pointer"
                       value={selectedClient.id}
                       onChange={(e) => setSelectedClient(MOCK_CLIENTS.find(c => c.id === parseInt(e.target.value)))}
                    >
                       {MOCK_CLIENTS.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
                    </select>
                 </div>
-                <div className="flex items-center px-3 py-1">
+                <div className="flex items-center px-2 md:px-3 py-1">
                    <select 
-                      className="bg-transparent text-sm font-medium text-slate-600 focus:outline-none cursor-pointer"
+                      className="bg-transparent text-xs md:text-sm font-medium text-slate-600 focus:outline-none cursor-pointer"
                       value={selectedYear}
                       onChange={(e) => setSelectedYear(e.target.value)}
                    >
@@ -726,19 +750,19 @@ export default function AccountingApp() {
              </div>
           </div>
 
-          <div className="flex items-center space-x-4">
-            <button className="relative p-2 text-slate-400 hover:text-slate-600">
+          <div className="flex items-center space-x-2 md:space-x-4">
+            <button className="relative p-2 text-slate-400 hover:text-slate-600 transition-colors">
               <Bell className="w-5 h-5" />
               <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
             </button>
-            <div className="h-8 w-8 bg-blue-900 rounded-full flex items-center justify-center text-white text-xs font-bold">
+            <div className="h-8 w-8 bg-blue-900 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
               CA
             </div>
           </div>
         </header>
 
         {/* Content Area */}
-        <main className="flex-1 overflow-auto p-6">
+        <main className="flex-1 overflow-auto p-4 md:p-6">
            <div className="max-w-7xl mx-auto">
               {renderContent()}
            </div>
