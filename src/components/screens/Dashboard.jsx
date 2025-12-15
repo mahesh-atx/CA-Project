@@ -1,15 +1,16 @@
 // Gateway Dashboard - Tally-style home screen
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   LayoutDashboard, Users, BookOpen, FileText, PieChart, 
   FileSpreadsheet, Settings, UploadCloud, Building2,
-  Calendar, ChevronRight, TrendingUp, AlertCircle
+  Calendar, ChevronRight, TrendingUp, AlertCircle, Database, Trash2
 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
-import { Card, ShortcutBar } from '../ui';
+import { Card, ShortcutBar, Button } from '../ui';
 import { formatCurrency } from '../../utils/formatters';
 import { useKeyboardShortcuts } from '../../hooks/useKeyboardShortcuts';
+import { loadSampleData, clearSampleData } from '../../services/sampleData';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -18,14 +19,41 @@ const Dashboard = () => {
     getClientLedgers, 
     getClientVouchers, 
     selectedClient,
-    selectedFinancialYear 
+    selectedFinancialYear,
+    refreshData
   } = useApp();
+
+  const [sampleDataLoaded, setSampleDataLoaded] = useState(false);
+  const [loadingMessage, setLoadingMessage] = useState('');
 
   const ledgers = getClientLedgers();
   const vouchers = getClientVouchers();
 
   // Enable keyboard shortcuts
   useKeyboardShortcuts({});
+
+  // Load sample data handler
+  const handleLoadSampleData = () => {
+    try {
+      const result = loadSampleData();
+      setSampleDataLoaded(true);
+      setLoadingMessage(`✅ Loaded: ${result.clientName} with ${result.ledgersCount} ledgers, ${result.vouchersCount} vouchers, ${result.stockItemsCount} stock items, ${result.employeesCount} employees`);
+      if (refreshData) refreshData();
+      setTimeout(() => window.location.reload(), 1500);
+    } catch (error) {
+      setLoadingMessage('❌ Error loading sample data');
+    }
+  };
+
+  const handleClearSampleData = () => {
+    if (window.confirm('Clear sample data (ABC Industries Pvt Ltd)?')) {
+      clearSampleData();
+      setLoadingMessage('🗑️ Sample data cleared');
+      setSampleDataLoaded(false);
+      if (refreshData) refreshData();
+      setTimeout(() => window.location.reload(), 1000);
+    }
+  };
 
   // Calculate stats
   const todayVouchers = vouchers.filter(v => {
@@ -72,12 +100,29 @@ const Dashboard = () => {
   return (
     <div className="min-h-[calc(100vh-180px)] pb-12">
       {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold text-slate-900">Gateway of CA Pro Connect</h1>
-        <p className="text-sm text-slate-500 mt-1">
-          {selectedClient?.name || 'Select a client'} • FY {selectedFinancialYear}
-        </p>
+      <div className="mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div>
+          <h1 className="text-2xl font-bold text-slate-900">Gateway of CA Pro Connect</h1>
+          <p className="text-sm text-slate-500 mt-1">
+            {selectedClient?.name || 'Select a client'} • FY {selectedFinancialYear}
+          </p>
+        </div>
+        <div className="flex space-x-2">
+          <Button variant="secondary" icon={Database} onClick={handleLoadSampleData}>
+            Load Sample Data
+          </Button>
+          <Button variant="secondary" icon={Trash2} onClick={handleClearSampleData}>
+            Clear
+          </Button>
+        </div>
       </div>
+
+      {/* Sample Data Message */}
+      {loadingMessage && (
+        <div className="mb-6 p-4 bg-emerald-50 border border-emerald-200 rounded-sm text-sm text-emerald-800">
+          {loadingMessage}
+        </div>
+      )}
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         {/* Left Panel - Company Info */}
