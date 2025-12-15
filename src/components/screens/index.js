@@ -13,4 +13,6 @@ export { default as StockItems } from './StockItems';
 export { default as StockSummary } from './StockSummary';
 export { default as GSTR1Report } from './GSTR1Report';
 export { default as GSTR3BReport } from './GSTR3BReport';
+export { default as BankReconciliation } from './BankReconciliation';
+export { default as Payroll } from './Payroll';
 export { Companies, SettingsScreen, AccessDenied } from './Placeholders';

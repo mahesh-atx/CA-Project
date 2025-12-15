@@ -20,7 +20,9 @@ import {
   StockItems,
   StockSummary,
   GSTR1Report,
-  GSTR3BReport
+  GSTR3BReport,
+  BankReconciliation,
+  Payroll
 } from './components/screens';
 import { MENU_ITEMS } from './constants';
 
@@ -70,6 +72,8 @@ const MainLayout = () => {
               <Route path="/gst" element={<GSTDashboard />} />
               <Route path="/gstr1" element={<GSTR1Report />} />
               <Route path="/gstr3b" element={<GSTR3BReport />} />
+              <Route path="/bank-reconciliation" element={<BankReconciliation />} />
+              <Route path="/payroll" element={<Payroll />} />
               <Route path="/reports" element={<Reports />} />
               <Route path="/documents" element={<DocumentManager />} />
               <Route path="/settings" element={<SettingsScreen />} />

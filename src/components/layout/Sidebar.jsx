@@ -18,7 +18,9 @@ import {
   Package,
   BarChart3,
   FileOutput,
-  FileBarChart
+  FileBarChart,
+  Landmark,
+  DollarSign
 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import { MENU_ITEMS } from '../../constants';
@@ -38,7 +40,9 @@ const iconMap = {
   Package,
   BarChart3,
   FileOutput,
-  FileBarChart
+  FileBarChart,
+  Landmark,
+  DollarSign
 };
 
 const Sidebar = () => {

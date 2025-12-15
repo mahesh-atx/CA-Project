@@ -45,6 +45,8 @@ export const MENU_ITEMS = [
   { id: "daybook", path: "/daybook", label: "Day Book", icon: "Calendar", color: "text-rose-500" },
   { id: "stock-items", path: "/stock-items", label: "Inventory", icon: "Package", color: "text-indigo-500" },
   { id: "stock-summary", path: "/stock-summary", label: "Stock Report", icon: "BarChart3", color: "text-purple-500" },
+  { id: "bank-reconciliation", path: "/bank-reconciliation", label: "Bank Recon", icon: "Landmark", color: "text-cyan-500" },
+  { id: "payroll", path: "/payroll", label: "Payroll", icon: "DollarSign", color: "text-emerald-500" },
   { id: "gst", path: "/gst", label: "GST Portal", icon: "PieChart", color: "text-pink-500" },
   { id: "gstr1", path: "/gstr1", label: "GSTR-1", icon: "FileOutput", color: "text-orange-500" },
   { id: "gstr3b", path: "/gstr3b", label: "GSTR-3B", icon: "FileBarChart", color: "text-blue-500" },
