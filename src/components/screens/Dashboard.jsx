@@ -20,7 +20,7 @@ const Dashboard = () => {
     getClientVouchers, 
     selectedClient,
     selectedFinancialYear,
-    refreshData
+    refreshAllData
   } = useApp();
 
   const [sampleDataLoaded, setSampleDataLoaded] = useState(false);
@@ -37,10 +37,12 @@ const Dashboard = () => {
     try {
       const result = loadSampleData();
       setSampleDataLoaded(true);
-      setLoadingMessage(`✅ Loaded: ${result.clientName} with ${result.ledgersCount} ledgers, ${result.vouchersCount} vouchers, ${result.stockItemsCount} stock items, ${result.employeesCount} employees`);
-      if (refreshData) refreshData();
-      setTimeout(() => window.location.reload(), 1500);
+      setLoadingMessage(`✅ Data loaded! ${result.ledgersCount} ledgers, ${result.vouchersCount} vouchers. Select "${result.clientName}" from the dropdown above.`);
+      if (refreshAllData) refreshAllData();
+      // Delay reload to let message show
+      setTimeout(() => window.location.reload(), 2000);
     } catch (error) {
+      console.error(error);
       setLoadingMessage('❌ Error loading sample data');
     }
   };
@@ -50,7 +52,7 @@ const Dashboard = () => {
       clearSampleData();
       setLoadingMessage('🗑️ Sample data cleared');
       setSampleDataLoaded(false);
-      if (refreshData) refreshData();
+      if (refreshAllData) refreshAllData();
       setTimeout(() => window.location.reload(), 1000);
     }
   };

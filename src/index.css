@@ -1,3 +1,113 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Print Styles - Hide sidebar and header when printing */
+@media print {
+  /* Hide sidebar completely */
+  aside {
+    display: none !important;
+  }
+
+  /* Hide header */
+  header {
+    display: none !important;
+  }
+
+  /* Hide shortcut bar */
+  .shortcut-bar,
+  [class*="fixed bottom"] {
+    display: none !important;
+  }
+
+  /* Hide buttons and controls */
+  button {
+    display: none !important;
+  }
+
+  /* Make main content full width */
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .flex-1 {
+    flex: none !important;
+    width: 100% !important;
+  }
+
+  /* Remove shadows and borders for cleaner print */
+  .shadow,
+  .shadow-sm,
+  .shadow-md,
+  .shadow-lg {
+    box-shadow: none !important;
+  }
+
+  /* Ensure cards print well */
+  .bg-slate-50,
+  .bg-slate-100 {
+    background-color: white !important;
+  }
+
+  /* Page breaks */
+  .page-break-before {
+    page-break-before: always;
+  }
+
+  .page-break-after {
+    page-break-after: always;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  /* Ensure tables fit on page */
+  table {
+    font-size: 10px !important;
+  }
+
+  /* Show printable areas at full width */
+  .print-only {
+    display: block !important;
+  }
+
+  /* Remove background colors for better printing */
+  .bg-black,
+  .bg-slate-800,
+  .bg-slate-900 {
+    background-color: white !important;
+    color: black !important;
+  }
+
+  /* Ensure breadcrumbs are hidden */
+  nav,
+  .breadcrumb {
+    display: none !important;
+  }
+}
+
+/* Utility class for print-only content */
+.print-only {
+  display: none;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}

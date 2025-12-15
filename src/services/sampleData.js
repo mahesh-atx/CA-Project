@@ -1,5 +1,6 @@
 // Sample Data Generator for Testing
-// Run this from the Dashboard or Settings to populate test data
+// Uses proper storage service so data shows correctly
+import { STORAGE_KEYS } from '../constants';
 
 export const SAMPLE_CLIENT = {
   id: 'sample_client_001',
@@ -14,151 +15,151 @@ export const SAMPLE_CLIENT = {
   group: 'Manufacturing',
   status: 'Active',
   financialYearStart: '2024-04-01',
-  booksFrom: '2024-04-01'
+  booksFrom: '2024-04-01',
+  createdAt: new Date().toISOString()
 };
 
 export const SAMPLE_LEDGERS = [
   // Bank & Cash
-  { id: 'led_hdfc', name: 'HDFC Bank - Current A/c', group: 'Current Assets', subGroup: 'Bank Accounts', openingBalance: 500000, openingBalanceType: 'Dr' },
-  { id: 'led_cash', name: 'Cash in Hand', group: 'Current Assets', subGroup: 'Cash-in-hand', openingBalance: 50000, openingBalanceType: 'Dr' },
+  { id: 'led_hdfc', name: 'HDFC Bank - Current A/c', group: 'Current Assets', subGroup: 'Bank Accounts', openingBalance: 500000, openingBalanceType: 'Dr', clientId: 'sample_client_001' },
+  { id: 'led_cash', name: 'Cash in Hand', group: 'Current Assets', subGroup: 'Cash-in-hand', openingBalance: 50000, openingBalanceType: 'Dr', clientId: 'sample_client_001' },
   
   // Income
-  { id: 'led_sales', name: 'Sales Account', group: 'Direct Income', subGroup: 'Sales Accounts', openingBalance: 0, openingBalanceType: 'Cr' },
-  { id: 'led_service', name: 'Service Income', group: 'Indirect Income', subGroup: '', openingBalance: 0, openingBalanceType: 'Cr' },
+  { id: 'led_sales', name: 'Sales Account', group: 'Direct Income', subGroup: 'Sales Accounts', openingBalance: 0, openingBalanceType: 'Cr', clientId: 'sample_client_001' },
+  { id: 'led_service', name: 'Service Income', group: 'Indirect Income', subGroup: '', openingBalance: 0, openingBalanceType: 'Cr', clientId: 'sample_client_001' },
   
   // Expenses
-  { id: 'led_purchase', name: 'Purchase Account', group: 'Direct Expenses', subGroup: 'Purchase Accounts', openingBalance: 0, openingBalanceType: 'Dr' },
-  { id: 'led_salary', name: 'Salary & Wages', group: 'Indirect Expenses', subGroup: '', openingBalance: 0, openingBalanceType: 'Dr' },
-  { id: 'led_rent', name: 'Rent Expense', group: 'Indirect Expenses', subGroup: '', openingBalance: 0, openingBalanceType: 'Dr' },
-  { id: 'led_electricity', name: 'Electricity Charges', group: 'Indirect Expenses', subGroup: '', openingBalance: 0, openingBalanceType: 'Dr' },
-  { id: 'led_telephone', name: 'Telephone & Internet', group: 'Indirect Expenses', subGroup: '', openingBalance: 0, openingBalanceType: 'Dr' },
+  { id: 'led_purchase', name: 'Purchase Account', group: 'Direct Expenses', subGroup: 'Purchase Accounts', openingBalance: 0, openingBalanceType: 'Dr', clientId: 'sample_client_001' },
+  { id: 'led_salary', name: 'Salary & Wages', group: 'Indirect Expenses', subGroup: '', openingBalance: 0, openingBalanceType: 'Dr', clientId: 'sample_client_001' },
+  { id: 'led_rent', name: 'Rent Expense', group: 'Indirect Expenses', subGroup: '', openingBalance: 0, openingBalanceType: 'Dr', clientId: 'sample_client_001' },
+  { id: 'led_electricity', name: 'Electricity Charges', group: 'Indirect Expenses', subGroup: '', openingBalance: 0, openingBalanceType: 'Dr', clientId: 'sample_client_001' },
+  { id: 'led_telephone', name: 'Telephone & Internet', group: 'Indirect Expenses', subGroup: '', openingBalance: 0, openingBalanceType: 'Dr', clientId: 'sample_client_001' },
   
   // GST Ledgers
-  { id: 'led_cgst_out', name: 'CGST Output', group: 'Current Liabilities', subGroup: 'Duties & Taxes', openingBalance: 0, openingBalanceType: 'Cr' },
-  { id: 'led_sgst_out', name: 'SGST Output', group: 'Current Liabilities', subGroup: 'Duties & Taxes', openingBalance: 0, openingBalanceType: 'Cr' },
-  { id: 'led_igst_out', name: 'IGST Output', group: 'Current Liabilities', subGroup: 'Duties & Taxes', openingBalance: 0, openingBalanceType: 'Cr' },
-  { id: 'led_cgst_in', name: 'CGST Input', group: 'Current Assets', subGroup: 'Loans & Advances', openingBalance: 0, openingBalanceType: 'Dr' },
-  { id: 'led_sgst_in', name: 'SGST Input', group: 'Current Assets', subGroup: 'Loans & Advances', openingBalance: 0, openingBalanceType: 'Dr' },
-  { id: 'led_igst_in', name: 'IGST Input', group: 'Current Assets', subGroup: 'Loans & Advances', openingBalance: 0, openingBalanceType: 'Dr' },
-  { id: 'led_tds', name: 'TDS Payable', group: 'Current Liabilities', subGroup: 'Duties & Taxes', openingBalance: 0, openingBalanceType: 'Cr' },
+  { id: 'led_cgst_out', name: 'CGST Output', group: 'Current Liabilities', subGroup: 'Duties & Taxes', openingBalance: 0, openingBalanceType: 'Cr', clientId: 'sample_client_001' },
+  { id: 'led_sgst_out', name: 'SGST Output', group: 'Current Liabilities', subGroup: 'Duties & Taxes', openingBalance: 0, openingBalanceType: 'Cr', clientId: 'sample_client_001' },
+  { id: 'led_igst_out', name: 'IGST Output', group: 'Current Liabilities', subGroup: 'Duties & Taxes', openingBalance: 0, openingBalanceType: 'Cr', clientId: 'sample_client_001' },
+  { id: 'led_cgst_in', name: 'CGST Input', group: 'Current Assets', subGroup: 'Loans & Advances', openingBalance: 0, openingBalanceType: 'Dr', clientId: 'sample_client_001' },
+  { id: 'led_sgst_in', name: 'SGST Input', group: 'Current Assets', subGroup: 'Loans & Advances', openingBalance: 0, openingBalanceType: 'Dr', clientId: 'sample_client_001' },
+  { id: 'led_igst_in', name: 'IGST Input', group: 'Current Assets', subGroup: 'Loans & Advances', openingBalance: 0, openingBalanceType: 'Dr', clientId: 'sample_client_001' },
+  { id: 'led_tds', name: 'TDS Payable', group: 'Current Liabilities', subGroup: 'Duties & Taxes', openingBalance: 0, openingBalanceType: 'Cr', clientId: 'sample_client_001' },
   
   // Debtors & Creditors
-  { id: 'led_deb_xyz', name: 'XYZ Traders (Debtor)', group: 'Current Assets', subGroup: 'Sundry Debtors', gstin: '27AABCT1234R1ZQ', openingBalance: 0, openingBalanceType: 'Dr' },
-  { id: 'led_deb_pqr', name: 'PQR Enterprises (Debtor)', group: 'Current Assets', subGroup: 'Sundry Debtors', gstin: '27AABCP5678R1ZP', openingBalance: 0, openingBalanceType: 'Dr' },
-  { id: 'led_cred_sup1', name: 'Steel Suppliers Ltd (Creditor)', group: 'Current Liabilities', subGroup: 'Sundry Creditors', gstin: '27AABCS9012R1ZN', openingBalance: 0, openingBalanceType: 'Cr' },
-  { id: 'led_cred_sup2', name: 'Raw Material Co (Creditor)', group: 'Current Liabilities', subGroup: 'Sundry Creditors', gstin: '27AABCR3456R1ZM', openingBalance: 0, openingBalanceType: 'Cr' },
+  { id: 'led_deb_xyz', name: 'XYZ Traders (Debtor)', group: 'Current Assets', subGroup: 'Sundry Debtors', gstin: '27AABCT1234R1ZQ', openingBalance: 0, openingBalanceType: 'Dr', clientId: 'sample_client_001' },
+  { id: 'led_deb_pqr', name: 'PQR Enterprises (Debtor)', group: 'Current Assets', subGroup: 'Sundry Debtors', gstin: '27AABCP5678R1ZP', openingBalance: 0, openingBalanceType: 'Dr', clientId: 'sample_client_001' },
+  { id: 'led_cred_sup1', name: 'Steel Suppliers Ltd (Creditor)', group: 'Current Liabilities', subGroup: 'Sundry Creditors', gstin: '27AABCS9012R1ZN', openingBalance: 0, openingBalanceType: 'Cr', clientId: 'sample_client_001' },
+  { id: 'led_cred_sup2', name: 'Raw Material Co (Creditor)', group: 'Current Liabilities', subGroup: 'Sundry Creditors', gstin: '27AABCR3456R1ZM', openingBalance: 0, openingBalanceType: 'Cr', clientId: 'sample_client_001' },
   
   // Fixed Assets
-  { id: 'led_machinery', name: 'Plant & Machinery', group: 'Fixed Assets', subGroup: '', openingBalance: 1500000, openingBalanceType: 'Dr' },
-  { id: 'led_furniture', name: 'Furniture & Fixtures', group: 'Fixed Assets', subGroup: '', openingBalance: 200000, openingBalanceType: 'Dr' },
+  { id: 'led_machinery', name: 'Plant & Machinery', group: 'Fixed Assets', subGroup: '', openingBalance: 1500000, openingBalanceType: 'Dr', clientId: 'sample_client_001' },
+  { id: 'led_furniture', name: 'Furniture & Fixtures', group: 'Fixed Assets', subGroup: '', openingBalance: 200000, openingBalanceType: 'Dr', clientId: 'sample_client_001' },
   
   // Capital
-  { id: 'led_capital', name: 'Capital Account', group: 'Capital Account', subGroup: '', openingBalance: 2000000, openingBalanceType: 'Cr' },
+  { id: 'led_capital', name: 'Capital Account', group: 'Capital Account', subGroup: '', openingBalance: 2000000, openingBalanceType: 'Cr', clientId: 'sample_client_001' },
 ];
 
 export const SAMPLE_VOUCHERS = [
-  // December 2024 Transactions
   {
-    id: 'vch_001', voucherNo: 'PUR/001', type: 'purchase', date: '2024-12-01',
+    id: 'vch_001', voucherNo: 'PUR/001', type: 'purchase', date: '2024-12-01', clientId: 'sample_client_001',
     entries: [
       { ledgerId: 'led_purchase', ledgerName: 'Purchase Account', amount: 100000, type: 'Dr' },
       { ledgerId: 'led_cgst_in', ledgerName: 'CGST Input', amount: 9000, type: 'Dr' },
       { ledgerId: 'led_sgst_in', ledgerName: 'SGST Input', amount: 9000, type: 'Dr' },
       { ledgerId: 'led_cred_sup1', ledgerName: 'Steel Suppliers Ltd (Creditor)', amount: 118000, type: 'Cr' }
     ],
-    partyLedgerId: 'led_cred_sup1', narration: 'Purchase of steel rods as per Invoice #SS/2024/001'
+    partyLedgerId: 'led_cred_sup1', narration: 'Purchase of steel rods as per Invoice #SS/2024/001', totalAmount: 118000
   },
   {
-    id: 'vch_002', voucherNo: 'SAL/001', type: 'sales', date: '2024-12-05',
+    id: 'vch_002', voucherNo: 'SAL/001', type: 'sales', date: '2024-12-05', clientId: 'sample_client_001',
     entries: [
       { ledgerId: 'led_deb_xyz', ledgerName: 'XYZ Traders (Debtor)', amount: 236000, type: 'Dr' },
       { ledgerId: 'led_sales', ledgerName: 'Sales Account', amount: 200000, type: 'Cr' },
       { ledgerId: 'led_cgst_out', ledgerName: 'CGST Output', amount: 18000, type: 'Cr' },
       { ledgerId: 'led_sgst_out', ledgerName: 'SGST Output', amount: 18000, type: 'Cr' }
     ],
-    partyLedgerId: 'led_deb_xyz', narration: 'Sale of finished goods to XYZ Traders'
+    partyLedgerId: 'led_deb_xyz', narration: 'Sale of finished goods to XYZ Traders', totalAmount: 236000
   },
   {
-    id: 'vch_003', voucherNo: 'RCT/001', type: 'receipt', date: '2024-12-10',
+    id: 'vch_003', voucherNo: 'RCT/001', type: 'receipt', date: '2024-12-10', clientId: 'sample_client_001',
     entries: [
       { ledgerId: 'led_hdfc', ledgerName: 'HDFC Bank - Current A/c', amount: 236000, type: 'Dr' },
       { ledgerId: 'led_deb_xyz', ledgerName: 'XYZ Traders (Debtor)', amount: 236000, type: 'Cr' }
     ],
     partyLedgerId: 'led_deb_xyz', chequeNo: '456789', chequeDate: '2024-12-10', 
-    narration: 'Payment received from XYZ Traders via NEFT'
+    narration: 'Payment received from XYZ Traders via NEFT', totalAmount: 236000
   },
   {
-    id: 'vch_004', voucherNo: 'PMT/001', type: 'payment', date: '2024-12-12',
+    id: 'vch_004', voucherNo: 'PMT/001', type: 'payment', date: '2024-12-12', clientId: 'sample_client_001',
     entries: [
       { ledgerId: 'led_cred_sup1', ledgerName: 'Steel Suppliers Ltd (Creditor)', amount: 118000, type: 'Dr' },
       { ledgerId: 'led_hdfc', ledgerName: 'HDFC Bank - Current A/c', amount: 118000, type: 'Cr' }
     ],
     partyLedgerId: 'led_cred_sup1', chequeNo: '789012', chequeDate: '2024-12-12',
-    narration: 'Payment to Steel Suppliers Ltd'
+    narration: 'Payment to Steel Suppliers Ltd', totalAmount: 118000
   },
   {
-    id: 'vch_005', voucherNo: 'PUR/002', type: 'purchase', date: '2024-12-15',
+    id: 'vch_005', voucherNo: 'PUR/002', type: 'purchase', date: '2024-12-15', clientId: 'sample_client_001',
     entries: [
       { ledgerId: 'led_purchase', ledgerName: 'Purchase Account', amount: 75000, type: 'Dr' },
       { ledgerId: 'led_cgst_in', ledgerName: 'CGST Input', amount: 6750, type: 'Dr' },
       { ledgerId: 'led_sgst_in', ledgerName: 'SGST Input', amount: 6750, type: 'Dr' },
       { ledgerId: 'led_cred_sup2', ledgerName: 'Raw Material Co (Creditor)', amount: 88500, type: 'Cr' }
     ],
-    partyLedgerId: 'led_cred_sup2', narration: 'Purchase of raw materials'
+    partyLedgerId: 'led_cred_sup2', narration: 'Purchase of raw materials', totalAmount: 88500
   },
   {
-    id: 'vch_006', voucherNo: 'SAL/002', type: 'sales', date: '2024-12-18',
+    id: 'vch_006', voucherNo: 'SAL/002', type: 'sales', date: '2024-12-18', clientId: 'sample_client_001',
     entries: [
       { ledgerId: 'led_deb_pqr', ledgerName: 'PQR Enterprises (Debtor)', amount: 354000, type: 'Dr' },
       { ledgerId: 'led_sales', ledgerName: 'Sales Account', amount: 300000, type: 'Cr' },
       { ledgerId: 'led_cgst_out', ledgerName: 'CGST Output', amount: 27000, type: 'Cr' },
       { ledgerId: 'led_sgst_out', ledgerName: 'SGST Output', amount: 27000, type: 'Cr' }
     ],
-    partyLedgerId: 'led_deb_pqr', narration: 'Sale to PQR Enterprises'
+    partyLedgerId: 'led_deb_pqr', narration: 'Sale to PQR Enterprises', totalAmount: 354000
   },
   {
-    id: 'vch_007', voucherNo: 'PMT/002', type: 'payment', date: '2024-12-20',
+    id: 'vch_007', voucherNo: 'PMT/002', type: 'payment', date: '2024-12-20', clientId: 'sample_client_001',
     entries: [
       { ledgerId: 'led_rent', ledgerName: 'Rent Expense', amount: 25000, type: 'Dr' },
       { ledgerId: 'led_hdfc', ledgerName: 'HDFC Bank - Current A/c', amount: 25000, type: 'Cr' }
     ],
-    narration: 'Office rent for December 2024'
+    narration: 'Office rent for December 2024', totalAmount: 25000
   },
   {
-    id: 'vch_008', voucherNo: 'PMT/003', type: 'payment', date: '2024-12-22',
+    id: 'vch_008', voucherNo: 'PMT/003', type: 'payment', date: '2024-12-22', clientId: 'sample_client_001',
     entries: [
       { ledgerId: 'led_salary', ledgerName: 'Salary & Wages', amount: 150000, type: 'Dr' },
       { ledgerId: 'led_hdfc', ledgerName: 'HDFC Bank - Current A/c', amount: 150000, type: 'Cr' }
     ],
-    narration: 'Salary payment for December 2024'
+    narration: 'Salary payment for December 2024', totalAmount: 150000
   },
   {
-    id: 'vch_009', voucherNo: 'RCT/002', type: 'receipt', date: '2024-12-25',
+    id: 'vch_009', voucherNo: 'RCT/002', type: 'receipt', date: '2024-12-25', clientId: 'sample_client_001',
     entries: [
       { ledgerId: 'led_hdfc', ledgerName: 'HDFC Bank - Current A/c', amount: 354000, type: 'Dr' },
       { ledgerId: 'led_deb_pqr', ledgerName: 'PQR Enterprises (Debtor)', amount: 354000, type: 'Cr' }
     ],
     partyLedgerId: 'led_deb_pqr', chequeNo: '123456', chequeDate: '2024-12-25',
-    narration: 'Payment received from PQR Enterprises', isReconciled: true, reconcileDate: '2024-12-26'
+    narration: 'Payment received from PQR Enterprises', isReconciled: true, reconcileDate: '2024-12-26', totalAmount: 354000
   },
   {
-    id: 'vch_010', voucherNo: 'JRN/001', type: 'journal', date: '2024-12-28',
+    id: 'vch_010', voucherNo: 'JRN/001', type: 'journal', date: '2024-12-28', clientId: 'sample_client_001',
     entries: [
       { ledgerId: 'led_electricity', ledgerName: 'Electricity Charges', amount: 8500, type: 'Dr' },
       { ledgerId: 'led_telephone', ledgerName: 'Telephone & Internet', amount: 3500, type: 'Dr' },
       { ledgerId: 'led_cash', ledgerName: 'Cash in Hand', amount: 12000, type: 'Cr' }
     ],
-    narration: 'Office expenses paid in cash'
+    narration: 'Office expenses paid in cash', totalAmount: 12000
   }
 ];
 
 export const SAMPLE_STOCK_ITEMS = [
-  { id: 'stk_001', name: 'Steel Rod 12mm', group: 'raw-materials', unit: 'Kg', openingQty: 1000, openingRate: 65, hsnCode: '7213', gstRate: 18, reorderLevel: 200 },
-  { id: 'stk_002', name: 'Steel Rod 10mm', group: 'raw-materials', unit: 'Kg', openingQty: 800, openingRate: 60, hsnCode: '7213', gstRate: 18, reorderLevel: 150 },
-  { id: 'stk_003', name: 'Cement Bags', group: 'raw-materials', unit: 'Bags', openingQty: 200, openingRate: 350, hsnCode: '2523', gstRate: 28, reorderLevel: 50 },
-  { id: 'stk_004', name: 'Finished Product A', group: 'finished-goods', unit: 'Nos', openingQty: 50, openingRate: 2500, hsnCode: '7308', gstRate: 18, reorderLevel: 10 },
-  { id: 'stk_005', name: 'Finished Product B', group: 'finished-goods', unit: 'Nos', openingQty: 30, openingRate: 3500, hsnCode: '7308', gstRate: 18, reorderLevel: 5 },
-  { id: 'stk_006', name: 'Packing Material', group: 'consumables', unit: 'Pcs', openingQty: 500, openingRate: 15, hsnCode: '3923', gstRate: 18, reorderLevel: 100 },
+  { id: 'stk_001', name: 'Steel Rod 12mm', group: 'raw-materials', unit: 'Kg', openingQty: 1000, openingRate: 65, hsnCode: '7213', gstRate: 18, reorderLevel: 200, clientId: 'sample_client_001' },
+  { id: 'stk_002', name: 'Steel Rod 10mm', group: 'raw-materials', unit: 'Kg', openingQty: 800, openingRate: 60, hsnCode: '7213', gstRate: 18, reorderLevel: 150, clientId: 'sample_client_001' },
+  { id: 'stk_003', name: 'Cement Bags', group: 'raw-materials', unit: 'Bags', openingQty: 200, openingRate: 350, hsnCode: '2523', gstRate: 28, reorderLevel: 50, clientId: 'sample_client_001' },
+  { id: 'stk_004', name: 'Finished Product A', group: 'finished-goods', unit: 'Nos', openingQty: 50, openingRate: 2500, hsnCode: '7308', gstRate: 18, reorderLevel: 10, clientId: 'sample_client_001' },
+  { id: 'stk_005', name: 'Finished Product B', group: 'finished-goods', unit: 'Nos', openingQty: 30, openingRate: 3500, hsnCode: '7308', gstRate: 18, reorderLevel: 5, clientId: 'sample_client_001' },
+  { id: 'stk_006', name: 'Packing Material', group: 'consumables', unit: 'Pcs', openingQty: 500, openingRate: 15, hsnCode: '3923', gstRate: 18, reorderLevel: 100, clientId: 'sample_client_001' },
 ];
 
 export const SAMPLE_EMPLOYEES = [
@@ -169,33 +170,35 @@ export const SAMPLE_EMPLOYEES = [
 ];
 
 /**
- * Load all sample data into localStorage
+ * Load all sample data into localStorage using proper storage keys
  */
 export const loadSampleData = () => {
   const clientId = SAMPLE_CLIENT.id;
   
-  // Save client
-  const existingClients = JSON.parse(localStorage.getItem('capro_clients') || '[]');
+  // 1. Save client to STORAGE_KEYS.CLIENTS
+  const existingClients = JSON.parse(localStorage.getItem(STORAGE_KEYS.CLIENTS) || '[]');
   if (!existingClients.find(c => c.id === clientId)) {
     existingClients.push(SAMPLE_CLIENT);
-    localStorage.setItem('capro_clients', JSON.stringify(existingClients));
+    localStorage.setItem(STORAGE_KEYS.CLIENTS, JSON.stringify(existingClients));
   }
   
-  // Save ledgers
-  const ledgerKey = `capro_ledgers_${clientId}`;
-  localStorage.setItem(ledgerKey, JSON.stringify(SAMPLE_LEDGERS));
+  // 2. Save ledgers to STORAGE_KEYS.LEDGERS (merge with existing)
+  const existingLedgers = JSON.parse(localStorage.getItem(STORAGE_KEYS.LEDGERS) || '[]');
+  const filteredLedgers = existingLedgers.filter(l => l.clientId !== clientId);
+  const newLedgers = [...filteredLedgers, ...SAMPLE_LEDGERS];
+  localStorage.setItem(STORAGE_KEYS.LEDGERS, JSON.stringify(newLedgers));
   
-  // Save vouchers
-  const voucherKey = `capro_vouchers_${clientId}`;
-  localStorage.setItem(voucherKey, JSON.stringify(SAMPLE_VOUCHERS));
+  // 3. Save vouchers to STORAGE_KEYS.VOUCHERS (merge with existing)
+  const existingVouchers = JSON.parse(localStorage.getItem(STORAGE_KEYS.VOUCHERS) || '[]');
+  const filteredVouchers = existingVouchers.filter(v => v.clientId !== clientId);
+  const newVouchers = [...filteredVouchers, ...SAMPLE_VOUCHERS];
+  localStorage.setItem(STORAGE_KEYS.VOUCHERS, JSON.stringify(newVouchers));
   
-  // Save stock items
-  const stockKey = `stock_items_${clientId}`;
-  localStorage.setItem(stockKey, JSON.stringify(SAMPLE_STOCK_ITEMS));
+  // 4. Save stock items (client-specific key for inventory service)
+  localStorage.setItem(`stock_items_${clientId}`, JSON.stringify(SAMPLE_STOCK_ITEMS));
   
-  // Save employees
-  const empKey = `employees_${clientId}`;
-  localStorage.setItem(empKey, JSON.stringify(SAMPLE_EMPLOYEES));
+  // 5. Save employees (client-specific key for payroll service)
+  localStorage.setItem(`employees_${clientId}`, JSON.stringify(SAMPLE_EMPLOYEES));
   
   return {
     clientId,
@@ -214,14 +217,24 @@ export const clearSampleData = () => {
   const clientId = SAMPLE_CLIENT.id;
   
   // Remove client
-  const clients = JSON.parse(localStorage.getItem('capro_clients') || '[]');
-  const filtered = clients.filter(c => c.id !== clientId);
-  localStorage.setItem('capro_clients', JSON.stringify(filtered));
+  const clients = JSON.parse(localStorage.getItem(STORAGE_KEYS.CLIENTS) || '[]');
+  const filteredClients = clients.filter(c => c.id !== clientId);
+  localStorage.setItem(STORAGE_KEYS.CLIENTS, JSON.stringify(filteredClients));
   
-  // Remove all related data
-  localStorage.removeItem(`capro_ledgers_${clientId}`);
-  localStorage.removeItem(`capro_vouchers_${clientId}`);
+  // Remove ledgers
+  const ledgers = JSON.parse(localStorage.getItem(STORAGE_KEYS.LEDGERS) || '[]');
+  const filteredLedgers = ledgers.filter(l => l.clientId !== clientId);
+  localStorage.setItem(STORAGE_KEYS.LEDGERS, JSON.stringify(filteredLedgers));
+  
+  // Remove vouchers
+  const vouchers = JSON.parse(localStorage.getItem(STORAGE_KEYS.VOUCHERS) || '[]');
+  const filteredVouchers = vouchers.filter(v => v.clientId !== clientId);
+  localStorage.setItem(STORAGE_KEYS.VOUCHERS, JSON.stringify(filteredVouchers));
+  
+  // Remove stock items
   localStorage.removeItem(`stock_items_${clientId}`);
+  
+  // Remove employees
   localStorage.removeItem(`employees_${clientId}`);
   
   return true;
